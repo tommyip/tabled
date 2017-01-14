@@ -1,0 +1,2 @@
+# We use pytest as our testing framework
+pytest
