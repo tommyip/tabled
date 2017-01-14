@@ -1,4 +1,4 @@
-def hello_world():
+def hello_world() -> None:
     """ First function of tabled!
 
     >>> hello_world()
