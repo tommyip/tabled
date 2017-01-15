@@ -81,6 +81,7 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
+html_sidebars = {'**': ['sidebar.html', 'globaltoc.html', 'searchbox.html']}
 
 # -- Options for HTML output ----------------------------------------------
 
