@@ -1,6 +1,10 @@
 # tableD: *Table for Humans*?
+[![RTD badge](https://readthedocs.org/projects/tabled/badge/?version=latest)](http://tabled.readthedocs.io/en/latest/)
+![MIT License badge](https://img.shields.io/badge/license-MIT-blue.svg)
 
 Display any data in pretty printed tabular format with ease using tableD.
+User guide and API documentation are available
+[here](http://tabled.readthedocs.io/en/latest/).
 
 ## Usage
 
