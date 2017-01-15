@@ -3,3 +3,7 @@ pytest
 
 # Type checking done by mypy
 mypy
+
+# Sphinx for documentation generator
+sphinx
+sphinx-autobuild
