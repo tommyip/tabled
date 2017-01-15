@@ -11,7 +11,7 @@ Display any data in pretty printed tabular format with ease using **tableD**.
 
    installation
    user_guide
-   api_documentation
+   source/modules
    contributors_guide
 
 .. _Github: https://github.com/tommyip/tabled
