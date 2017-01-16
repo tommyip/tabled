@@ -1,6 +1,9 @@
 # We use pytest as our testing framework
 pytest
 
+# Test coverage
+pytest-cov
+
 # Type checking done by mypy
 mypy
 
