@@ -10,3 +10,6 @@ mypy
 # Sphinx for documentation generator
 sphinx
 sphinx-autobuild
+
+# Google style docstrings
+sphinxcontrib-napoleon

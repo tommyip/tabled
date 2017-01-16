@@ -1,20 +1,10 @@
 """
-tableD: Table for Humans?
+tests.tabled
+~~~~~~~~~~~~~
 
-Author: Tommy Ip <hkmp7tommy@gmail.com>
-License: MIT
-Github repository: https://github.com/tommyip/tabled
-Python version: 3.5
-Docs: http://tabled.readthedocs.io/en/latest/
-
-This is the main unittest module for tableD. We use pytest as our testing
-framework, visit http://doc.pytest.org/en/latest/ for more information.
-
-To run the test suite, execute the following in the project's root:
-
-    $ py.test
-
-Both unittest and doctest will be invoked.
+:synopsis: Test main application interface of tableD.
+:copyright: (c) 2017, Tommy Ip.
+:license: MIT
 """
 
 from tabled import tabled
