@@ -4,10 +4,8 @@ API documentation
 
 This documentation shows all the public interfaces of tableD.
 
-------------------------
-Main developer interface
-------------------------
-
-.. autoclass:: tabled.tabled.TableD
+.. automodule:: tabled.tabled
     :members:
-    :undoc-members:
+
+.. automodule:: tabled.pretty_print
+    :members:
