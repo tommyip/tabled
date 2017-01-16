@@ -7,7 +7,7 @@ Version 0.1.0 (`Github`_)
 Display any data in pretty printed tabular format with ease using **tableD**.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    installation
    user_guide
