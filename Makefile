@@ -12,10 +12,9 @@ update-dep:
 	pip install -r requirements.txt
 
 tests:
-	$(MAKE) update-dep
 	pip install -e .
 	py.test
-	mypy tabled/*.py tests/*.py
+	mypy tabled/*.py tests/*.py --follow-imports=silent --ignore-missing-imports
 
 docs:
 	cd docs && $(MAKE) html
