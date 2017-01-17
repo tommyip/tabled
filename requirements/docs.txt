@@ -1,0 +1,8 @@
+-r ../requirements.txt
+
+# Generate documentation with Sphinx
+sphinx
+sphinx-autobuild
+
+# Google style docstrings
+sphinxcontrib-napoleon

@@ -1,6 +1,6 @@
-.PHONY: init clean tests docs
+.PHONY: init clean test docs
 
-all: clean init tests docs
+all: clean init test docs
 
 init:
 	rm venv -rf && \
@@ -9,9 +9,10 @@ init:
 	$(MAKE) update-dep
 
 update-dep:
-	pip install -r requirements.txt
+	pip install -r ./requirements/tests.txt
+	pip install -r ./requirements/docs.txt
 
-tests:
+test:
 	pip install -e .
 	py.test
 	mypy tabled/*.py tests/*.py --follow-imports=silent --ignore-missing-imports
