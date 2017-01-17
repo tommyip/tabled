@@ -1,6 +1,7 @@
 ![tableD](/docs/_static/logo.png)
 # tableD: *Table for Humans*?
 [![Build Status](https://travis-ci.org/tommyip/tabled.svg?branch=master)][Travis CI]
+[![Coverage Status](https://coveralls.io/repos/github/tommyip/tabled/badge.svg?branch=master)][Coveralls]
 [![RTD badge](https://readthedocs.org/projects/tabled/badge/?version=latest)][RTD]
 ![MIT License badge](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -59,5 +60,6 @@ To update your local fork to upstream, do the following.
     $ git fetch upstream
     $ git rebase upstream/dev
 
-[RTD]: http://tabled.readthedocs.io/en/latest/
 [Travis CI]: https://travis-ci.org/tommyip/tabled
+[Coveralls]: https://coveralls.io/github/tommyip/tabled?branch=master
+[RTD]: http://tabled.readthedocs.io/en/latest/
