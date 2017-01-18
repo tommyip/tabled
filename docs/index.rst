@@ -1,10 +1,12 @@
 ============================
-tableD: *Tables for Humans*?
+tableD: *Tables for Humans?*
 ============================
 
-Version 0.1.0 (`Github`_)
+v0.1.0 (`Github`_)
 
-Display any data in pretty printed tabular format with ease using **tableD**.
+**tableD** pretty prints your data in a configurable tabular format, there is
+no need to format your table manually! Using its clean and easy to use API,
+you can generate fancy looking table in no time.
 
 .. toctree::
    :maxdepth: 2
