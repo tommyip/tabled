@@ -1,65 +1,25 @@
-![tableD](/docs/_static/logo.png)
-# tableD: *Table for Humans*?
-[![Build Status](https://travis-ci.org/tommyip/tabled.svg?branch=master)][Travis CI]
-[![Coverage Status](https://coveralls.io/repos/github/tommyip/tabled/badge.svg?branch=master)][Coveralls]
-[![RTD badge](https://readthedocs.org/projects/tabled/badge/?version=latest)][RTD]
-![MIT License badge](https://img.shields.io/badge/license-MIT-blue.svg)
+<p align="center">
+    <img src="docs/.static/logo.png" alt="tableD" width="50%" height="50%">
+</p>
+<p align="center">
+    <a href="https://travis-ci.org/tommyip/tabled">
+        <img src="https://travis-ci.org/tommyip/tabled.svg?branch=master" alt="Tavis CI">
+    </a>
+    <a href="https://coveralls.io/github/tommyip/tabled?branch=master">
+        <img src="https://coveralls.io/repos/github/tommyip/tabled/badge.svg?branch=master" alt="Coveralls">
+    </a>
+    <a href="http://tabled.readthedocs.io/en/latest/?badge=latest">
+        <img src="https://readthedocs.org/projects/tabled/badge/?version=latest" alt="Read The Docs">
+    </a>
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license">
+</p>
 
-Display any data in pretty printed tabular format with ease using tableD.
-User guide and API documentation are available
-[here][RTD].
+# tableD: *Tables for Humans?*
 
-## Usage
+**tableD** pretty prints your data in a configurable tabular format, there is
+no need to format your table manually! Using its clean and easy to use API,
+you can generate fancy looking table in no time.
 
-## Installation
+Detailed documentation is available over at [Read the Docs][docs].
 
-## Contributing
-Any contribution are welcome!
-Get started by forking this repository by clicking the __*fork*__ button in
-this Github page. Then clone your fork using the command line as follows:
-
-    $ git clone https://github.com/<your_username>/tabled
-
-Source code lives in the `/tabled` directory. To maintained good code quality,
-please follow our coding convention. Documentation are generated using Sphinx
-from reStructuredText format files in `/docs` as well as docstrings inlined
-inside our Python modules.
-
-[mypy](http://mypy.readthedocs.io/en/latest/index.html) is used for type
-checking. Please read their documentation for more information.
-
-### Testing:
-
-We use pytest as our unittesting framework. Unittests lives in `/tests`
-directory while doctest are inlined in python modules. To invoke all tests,
-execute the following in the project's root:
-
-    $ py.test
-
-Mypy is used for type checking, you can run the checks with:
-
-    $ mypy tabled/*.py tests/*.py
-
-### Github Issues & Pull requests
-
-You can post feature requests, questions and bugs in our issues tab. Please
-prepend the title with appropriate tags (Feature request | Question | Bug).
-
-Pull requests are welcome! They should be merged into the `dev` branch, only
-releases are merged into the master branch to ensure its quality. Please make
-sure they passed all the unittest and type checks before submitting them.
-
-### Workflow
-We use the `rebase` workflow, which means that the history could be overwitten.
-To update your local fork to upstream, do the following.
-
-    // First time only
-    $ git remote add upstream https://github.com/tommyip/tabled
-
-    // Update
-    $ git fetch upstream
-    $ git rebase upstream/dev
-
-[Travis CI]: https://travis-ci.org/tommyip/tabled
-[Coveralls]: https://coveralls.io/github/tommyip/tabled?branch=master
-[RTD]: http://tabled.readthedocs.io/en/latest/
+[docs]: http://tabled.readthedocs.io/en/latest/
