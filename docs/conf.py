@@ -20,7 +20,7 @@ extensions = [
     'sphinxcontrib.napoleon'
 ]
 
-templates_path = ['_templates']
+templates_path = ['.templates']
 source_suffix = '.rst'
 master_doc = 'index'
 
@@ -55,9 +55,9 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['.static']
 
-html_logo = '_static/logo.png'
+html_logo = '.static/logo.png'
 
 html_sidebars = {'**': ['sidebar.html', 'globaltoc.html', 'searchbox.html']}
 
