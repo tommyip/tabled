@@ -8,3 +8,6 @@ pytest-cov
 
 # Type checking done by mypy
 mypy
+
+# Flake8 for linting
+flake8

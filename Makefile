@@ -16,6 +16,7 @@ test:
 	pip install -e .
 	py.test
 	mypy tabled/*.py tests/*.py --follow-imports=silent --ignore-missing-imports
+	flake8 tabled tests
 
 docs:
 	cd docs && $(MAKE) html
