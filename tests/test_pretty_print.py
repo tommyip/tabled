@@ -9,10 +9,11 @@ tests.pretty_print
 
 import pytest
 
-from tabled.pretty_print import left_pad, right_pad, left_right_pad
+from tabled.pretty_print import left_pad, right_pad, left_right_pad, pad
 
 
 class TestLeftPad:
+
     def test_normal(self) -> None:
         assert left_pad('Python', 13) == '       Python'
 
@@ -25,6 +26,7 @@ class TestLeftPad:
 
 
 class TestRightPad:
+
     def test_normal(self) -> None:
         assert right_pad('Python', 13) == 'Python       '
 
@@ -37,6 +39,7 @@ class TestRightPad:
 
 
 class TestLeftRightPad:
+
     def test_normal(self) -> None:
         assert left_right_pad('test', 8) == '  test  '
 
@@ -46,3 +49,19 @@ class TestLeftRightPad:
     def test_too_narrow(self) -> None:
         with pytest.raises(ValueError):
             left_right_pad('long string', 2)
+
+
+class TestPad:
+
+    def test_align_left(self) -> None:
+        assert pad('Test string', 15, 'left') == ' Test string   '
+
+    def test_align_right(self) -> None:
+        assert pad('Another example', 19, 'right') == '   Another example '
+
+    def test_align_center(self) -> None:
+        assert pad('Some string', 15, 'center') == '  Some string  '
+        assert pad('Some string', 16, 'center') == '  Some string   '
+
+    def test_margin(self) -> None:
+        assert pad('example.com', 15, margin=2) == '  example.com  '

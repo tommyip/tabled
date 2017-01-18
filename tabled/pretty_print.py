@@ -86,3 +86,38 @@ def left_right_pad(string: Text, width: int) -> Text:
 
     left_padded = left_pad(string, (pad_amount // 2) + string_length)
     return right_pad(left_padded, width)
+
+
+def pad(string: Text,
+        width: int,
+        align: Text = 'center',
+        margin: int = 1) -> Text:
+    """ Pad and align a string in a container.
+
+    Args:
+        string: Input text to be padded and aligned.
+        width: The width of the container.
+        align: Left, center or right alignment.
+        margin: Margin width between the string and the side wall.
+
+    Returns:
+        A string padded and aligned in a container.
+
+    Example:
+        >>> pad('library', 13, 'left')
+        ' library     '
+    """
+
+    width_no_margin = width - (margin * 2)
+
+    # Case/switch hack to reduce if/elif cluster.
+    pad_string = {
+        'left': right_pad,
+        'right': left_pad,
+        'center': left_right_pad
+    }
+
+    padded = pad_string[align](string, width_no_margin)
+
+    # Use left_right_pad to insert margin
+    return left_right_pad(padded, len(padded) + (margin * 2))
