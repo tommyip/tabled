@@ -9,3 +9,6 @@ This documentation shows all the public interfaces of tableD.
 
 .. automodule:: tabled.pretty_print
     :members:
+
+.. automodule:: tabled.utils
+    :members:
