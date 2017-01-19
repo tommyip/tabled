@@ -7,7 +7,7 @@ tests.pretty_print
 :license: MIT
 """
 
-from tabled.utils import max_width, rotate_table
+from tabled.utils import max_width, rotate_table, columns_width
 
 
 class TestMaxWidth:
@@ -55,3 +55,20 @@ class TestRotateTable:
         row = [['a', 'b', 'c', 'd']]
 
         assert rotate_table(column) == row
+
+
+class TestColumnsWidth:
+
+    def test_normal(self) -> None:
+        table = [['some text', 'Some more very long text', '123'],
+                 ['Another example', 'This is short', 'aaaaaa'],
+                 ['fn (x) -> i32 \{\}', '  ', 'tableD'],
+                 ['Spammmmmmm', 'More spammmmmmmmmmmmmmmmmmmmm', '']]
+
+        assert columns_width(table) == [18, 29, 6]
+
+    def test_empty_cells(self) -> None:
+        table = [['', '', '', '', ''],
+                 ['', '', '', '', '']]
+
+        assert columns_width(table) == [0, 0, 0, 0, 0]

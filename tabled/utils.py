@@ -55,3 +55,25 @@ def rotate_table(table: List[List[Text]]) -> List[List[Text]]:
     """
 
     return [list(row) for row in zip(*table)]
+
+
+def columns_width(table: List[List[Text]]) -> List[int]:
+    """ Finds the width for each column in a table.
+
+    Args:
+        table: Nested list of lists that is represented as a table structure.
+
+    Returns:
+        A list of integers showing the width for each columns. The width is
+        the determined by the longest text in a column.
+
+    Example:
+        >>> columns_width([['Example', 'This is very long'],
+        ...                ['Short', 'word'],
+        ...                ['Another long example', 'var']])
+        [20, 17]
+    """
+
+    rotated_table = rotate_table(table)
+
+    return list(map(max_width, rotated_table))
