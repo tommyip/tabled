@@ -9,7 +9,8 @@ tests.pretty_print
 
 import pytest
 
-from tabled.pretty_print import left_pad, right_pad, left_right_pad, pad
+from tabled.pretty_print import (left_pad, right_pad, left_right_pad,
+                                 pad, construct_row)
 
 
 class TestLeftPad:
@@ -65,3 +66,23 @@ class TestPad:
 
     def test_margin(self) -> None:
         assert pad('example.com', 15, margin=2) == '  example.com  '
+
+
+class TestConstructRow:
+
+    def test_normal(self) -> None:
+        row = ['Python', 'PyPy', 'RPython', 'Jython', 'Cython']
+        widths = [10, 11, 9, 11, 9]
+
+        output = construct_row(row, widths, dict(wall='||', connector='|'))
+        expected = '|| Python   | PyPy      | RPython | Jython    | Cython  ||'
+
+        assert output == expected
+
+    def test_blank(self) -> None:
+        row = ['', '', '', '', '']
+        widths = [2, 2, 2, 2, 2]
+
+        output = construct_row(row, widths, dict(wall='|', connector=':'))
+
+        assert output == '|  :  :  :  :  |'

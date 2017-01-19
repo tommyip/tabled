@@ -7,7 +7,7 @@ tabled.pretty_print
 :license: MIT
 """
 
-from typing import Text
+from typing import Text, Dict, List
 
 
 def left_pad(string: Text, width: int) -> Text:
@@ -90,7 +90,7 @@ def left_right_pad(string: Text, width: int) -> Text:
 
 def pad(string: Text,
         width: int,
-        align: Text = 'center',
+        align: Text = 'left',
         margin: int = 1) -> Text:
     """ Pad and align a string in a container.
 
@@ -121,3 +121,37 @@ def pad(string: Text,
 
     # Use left_right_pad to insert margin
     return left_right_pad(padded, len(padded) + (margin * 2))
+
+
+def construct_row(row: List[Text],
+                  widths: List[int],
+                  delimiters: Dict[str, Text],
+                  align: Text = 'left',
+                  margin: int = 1) -> Text:
+    """ Construct a string representation of a row in a table.
+
+    Args:
+        row: A row of string, each is a cell of their columns.
+        widths: A list of column widths.
+        delimiter: A dictionary of column dividers.
+        align: Left, center or right alignment of each cell.
+        margin: Margin width between the string and the side wall.
+
+    Returns:
+        A string containing a print ready row.
+
+    Example:
+        >>> construct_row(['Some cell content', 'word', '1'], [22, 6, 7],
+        ...               {'wall': '||', 'connector': '|'})
+        '|| Some cell content    | word | 1     ||'
+    """
+
+    output = '{wall}{columns}{wall}'
+
+    padded_row = [pad(*cell_n_width, align=align, margin=margin)
+                  for cell_n_width in zip(row, widths)]
+
+    return output.format(
+        wall=delimiters['wall'],
+        columns=delimiters['connector'].join(padded_row)
+    )
