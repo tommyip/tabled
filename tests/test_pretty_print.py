@@ -10,7 +10,7 @@ tests.pretty_print
 import pytest
 
 from tabled.pretty_print import (left_pad, right_pad, left_right_pad,
-                                 pad, construct_row)
+                                 pad, construct_row, generate_table)
 
 
 class TestLeftPad:
@@ -74,8 +74,9 @@ class TestConstructRow:
         row = ['Python', 'PyPy', 'RPython', 'Jython', 'Cython']
         widths = [10, 11, 9, 11, 9]
 
-        output = construct_row(row, widths, dict(wall='||', connector='|'))
-        expected = '|| Python   | PyPy      | RPython | Jython    | Cython  ||'
+        output = construct_row(row, widths,
+                               dict(left='|', connector='|', right='|'))
+        expected = '| Python   | PyPy      | RPython | Jython    | Cython  |'
 
         assert output == expected
 
@@ -83,6 +84,69 @@ class TestConstructRow:
         row = ['', '', '', '', '']
         widths = [2, 2, 2, 2, 2]
 
-        output = construct_row(row, widths, dict(wall='|', connector=':'))
+        output = construct_row(row, widths,
+                               dict(left='|', connector=':', right='|'))
 
         assert output == '|  :  :  :  :  |'
+
+
+class TestGenerateTable:
+
+    SIMPLE_HEADING = ['x', 'f(x) = x^3']
+    SIMPLE_TABLE = [[str(x), str(x ** 3)] for x in range(5)]
+
+    def test_style_default(self) -> None:
+
+        generated_table = generate_table(TestGenerateTable.SIMPLE_HEADING,
+                                         TestGenerateTable.SIMPLE_TABLE)
+
+        assert generated_table == ('+---+------------+\n'
+                                   '| x | f(x) = x^3 |\n'
+                                   '+---+------------+\n'
+                                   '| 0 | 0          |\n'
+                                   '| 1 | 1          |\n'
+                                   '| 2 | 8          |\n'
+                                   '| 3 | 27         |\n'
+                                   '| 4 | 64         |\n'
+                                   '+---+------------+')
+
+    def test_style_terminal(self) -> None:
+        generated_table = generate_table(TestGenerateTable.SIMPLE_HEADING,
+                                         TestGenerateTable.SIMPLE_TABLE,
+                                         style='terminal')
+
+        assert generated_table == ('╔═══╦════════════╗\n'
+                                   '║ x ║ f(x) = x^3 ║\n'
+                                   '╠═══╬════════════╣\n'
+                                   '║ 0 ║ 0          ║\n'
+                                   '║ 1 ║ 1          ║\n'
+                                   '║ 2 ║ 8          ║\n'
+                                   '║ 3 ║ 27         ║\n'
+                                   '║ 4 ║ 64         ║\n'
+                                   '╚═══╩════════════╝')
+
+    def test_textual_data(self) -> None:
+        headings = ['Category', 'Type', 'Name']
+        table = [['NoSQL', 'KV store', 'Aerospike'],
+                 ['NoSQL', 'Document store', 'MongoDB'],
+                 ['NoSQL', 'Graph', 'Neo4j'],
+                 ['NoSQL', 'Tabular', 'BigTable'],
+                 ['NoSQL', 'Column', 'Cassandra'],
+                 ['Relational', '', 'Oracle DB'],
+                 ['Relational', '', 'MySQL'],
+                 ['Relational', '', 'Microsoft SQL Server']]
+
+        expected = ('╔════════════╦════════════════╦══════════════════════╗\n'
+                    '║ Category   ║ Type           ║ Name                 ║\n'
+                    '╠════════════╬════════════════╬══════════════════════╣\n'
+                    '║ NoSQL      ║ KV store       ║ Aerospike            ║\n'
+                    '║ NoSQL      ║ Document store ║ MongoDB              ║\n'
+                    '║ NoSQL      ║ Graph          ║ Neo4j                ║\n'
+                    '║ NoSQL      ║ Tabular        ║ BigTable             ║\n'
+                    '║ NoSQL      ║ Column         ║ Cassandra            ║\n'
+                    '║ Relational ║                ║ Oracle DB            ║\n'
+                    '║ Relational ║                ║ MySQL                ║\n'
+                    '║ Relational ║                ║ Microsoft SQL Server ║\n'
+                    '╚════════════╩════════════════╩══════════════════════╝')
+
+        assert generate_table(headings, table, style='terminal') == expected

@@ -9,6 +9,9 @@ tabled.pretty_print
 
 from typing import Text, Dict, List
 
+from .utils import columns_width
+from .style_templates import style_templates
+
 
 def left_pad(string: Text, width: int) -> Text:
     """ Left pad a string in a container.
@@ -142,16 +145,103 @@ def construct_row(row: List[Text],
 
     Example:
         >>> construct_row(['Some cell content', 'word', '1'], [22, 6, 7],
-        ...               {'wall': '||', 'connector': '|'})
-        '|| Some cell content    | word | 1     ||'
+        ...               {'left': '|', 'right': '|', 'connector': '|'})
+        '| Some cell content    | word | 1     |'
     """
 
-    output = '{wall}{columns}{wall}'
+    output = '{left_wall}{columns}{right_wall}'
 
     padded_row = [pad(*cell_n_width, align=align, margin=margin)
                   for cell_n_width in zip(row, widths)]
 
     return output.format(
-        wall=delimiters['wall'],
-        columns=delimiters['connector'].join(padded_row)
+        left_wall=delimiters['left'],
+        columns=delimiters['connector'].join(padded_row),
+        right_wall=delimiters['right']
     )
+
+
+def generate_table(headings: List[Text],
+                   table: List[List[Text]],
+                   style: str = 'default') -> Text:
+    """ Generate pretty printed table.
+
+    Args:
+        headings: A list of text containing the headings.
+        table: Cells data in a nested list of list structure.
+        style: Style of formatting in the table.
+
+    Returns:
+        A string with formatting ready for output.
+
+    Example:
+        >>> table = [['1', '1'],
+        ...          ['2', '4'],
+        ...          ['3', '9']]
+        >>> print(generate_table(['x', 'f(x) = x^2'], table))
+        +---+------------+
+        | x | f(x) = x^2 |
+        +---+------------+
+        | 1 | 1          |
+        | 2 | 4          |
+        | 3 | 9          |
+        +---+------------+
+    """
+
+    output = ''
+
+    styling = style_templates[style]
+
+    pipe_char = styling['vertical']
+    cell_styling = dict(
+        left=pipe_char,
+        right=pipe_char,
+        connector=pipe_char
+    )
+
+    top_styling = dict(
+        left=styling['top_left'],
+        right=styling['top_right'],
+        connector=styling['down_joint']
+    )
+
+    divider_styling = dict(
+        left=styling['left_joint'],
+        right=styling['right_joint'],
+        connector=styling['cross_joint']
+    )
+
+    bottom_styling = dict(
+        left=styling['bottom_left'],
+        right=styling['bottom_right'],
+        connector=styling['up_joint']
+    )
+
+    widths = columns_width([headings] + table)
+    widths_with_margin = list(map(lambda x: x + 2, widths))
+
+    divider_row = list(map(
+        lambda widths: ''.join(styling['horizontal'] * widths),
+        widths_with_margin
+    ))
+
+    # Top border
+    output += construct_row(divider_row, widths_with_margin,
+                            top_styling, margin=0) + '\n'
+
+    # Header
+    output += construct_row(headings, widths_with_margin, cell_styling) + '\n'
+
+    # Header/content divider
+    output += construct_row(divider_row, widths_with_margin,
+                            divider_styling, margin=0) + '\n'
+
+    # Table contents
+    for row in table:
+        output += construct_row(row, widths_with_margin, cell_styling) + '\n'
+
+    # Bottom border
+    output += construct_row(divider_row, widths_with_margin,
+                            bottom_styling, margin=0)
+
+    return output
