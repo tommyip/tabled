@@ -7,6 +7,8 @@ tabled.style_templates
 :license: MIT
 """
 
+from typing import Dict, Text
+
 # Style: default
 # +------------+-----------+--------------+
 # | Heading 1  | Heading 2 | Last heading |
@@ -15,7 +17,7 @@ tabled.style_templates
 # | Cell 4     | Cell 5    | Cell 6       |
 # | Cell 7     | Cell 8    | Last cell    |
 # +------------+-----------+--------------+
-default = {
+DEFAULT = {
     'vertical':     '|',
     'horizontal':   '-',
     'top_left':     '+',
@@ -37,7 +39,7 @@ default = {
 # ║ Cell 4     ║ Cell 5    ║ Cell 6       ║
 # ║ Cell 7     ║ Cell 8    ║ Last cell    ║
 # ╚════════════╩═══════════╩══════════════╝
-terminal = {
+TERMINAL = {
     'vertical':     '║',
     'horizontal':   '═',
     'top_left':     '╔',
@@ -51,7 +53,44 @@ terminal = {
     'cross_joint':  '╬'
 }
 
-style_templates = dict(
-    default=default,
-    terminal=terminal
+STYLE_TEMPLATES = dict(
+    default=DEFAULT,
+    terminal=TERMINAL
 )
+
+
+def get_style(style: Text = 'default') -> Dict[str, Dict[str, Text]]:
+    """ Construct and return a table style.
+
+    Args:
+        style: Style name.
+
+    Returns:
+        A dictionary of style separated by categories.
+    """
+
+    styling = STYLE_TEMPLATES[style]
+
+    return {
+        'raw': styling,  # The entire stylesheet.
+        'row': {
+            'left': styling['vertical'],
+            'right': styling['vertical'],
+            'connector': styling['vertical']
+        },
+        'top_border': {
+            'left': styling['top_left'],
+            'right': styling['top_right'],
+            'connector': styling['down_joint']
+        },
+        'divider': {
+            'left': styling['left_joint'],
+            'right': styling['right_joint'],
+            'connector': styling['cross_joint']
+        },
+        'bottom_border': {
+            'left': styling['bottom_left'],
+            'right': styling['bottom_right'],
+            'connector': styling['up_joint']
+        }
+    }

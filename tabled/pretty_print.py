@@ -10,7 +10,7 @@ tabled.pretty_print
 from typing import Text, Dict, List
 
 from .utils import columns_width
-from .style_templates import style_templates
+from .style_templates import get_style
 
 
 def left_pad(string: Text, width: int) -> Text:
@@ -190,58 +190,33 @@ def generate_table(headings: List[Text],
 
     output = ''
 
-    styling = style_templates[style]
-
-    pipe_char = styling['vertical']
-    cell_styling = dict(
-        left=pipe_char,
-        right=pipe_char,
-        connector=pipe_char
-    )
-
-    top_styling = dict(
-        left=styling['top_left'],
-        right=styling['top_right'],
-        connector=styling['down_joint']
-    )
-
-    divider_styling = dict(
-        left=styling['left_joint'],
-        right=styling['right_joint'],
-        connector=styling['cross_joint']
-    )
-
-    bottom_styling = dict(
-        left=styling['bottom_left'],
-        right=styling['bottom_right'],
-        connector=styling['up_joint']
-    )
+    styling = get_style(style)
 
     widths = columns_width([headings] + table)
-    widths_with_margin = list(map(lambda x: x + 2, widths))
+    widths_with_margin = [width + 2 for width in widths]
 
-    divider_row = list(map(
-        lambda widths: ''.join(styling['horizontal'] * widths),
-        widths_with_margin
-    ))
+    divider_row = [''.join(styling['raw']['horizontal']) * width
+                   for width in widths_with_margin]
 
     # Top border
     output += construct_row(divider_row, widths_with_margin,
-                            top_styling, margin=0) + '\n'
+                            styling['top_border'], margin=0) + '\n'
 
     # Header
-    output += construct_row(headings, widths_with_margin, cell_styling) + '\n'
+    output += construct_row(headings, widths_with_margin,
+                            styling['row']) + '\n'
 
     # Header/content divider
     output += construct_row(divider_row, widths_with_margin,
-                            divider_styling, margin=0) + '\n'
+                            styling['divider'], margin=0) + '\n'
 
     # Table contents
     for row in table:
-        output += construct_row(row, widths_with_margin, cell_styling) + '\n'
+        output += construct_row(row, widths_with_margin,
+                                styling['row']) + '\n'
 
     # Bottom border
     output += construct_row(divider_row, widths_with_margin,
-                            bottom_styling, margin=0)
+                            styling['bottom_border'], margin=0)
 
     return output

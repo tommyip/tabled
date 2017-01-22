@@ -12,3 +12,6 @@ This documentation shows all the public interfaces of tableD.
 
 .. automodule:: tabled.utils
     :members:
+
+.. automodule:: tabled.style_templates
+    :members:
