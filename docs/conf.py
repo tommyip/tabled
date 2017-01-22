@@ -70,9 +70,10 @@ htmlhelp_basename = 'tableDdoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
+    'inputenc': '',
+    'utf8extra': '',
+
+    'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
