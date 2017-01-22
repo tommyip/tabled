@@ -9,6 +9,10 @@ tabled.tabled
 
 from typing import Any, List, Optional, Text
 
+import sys
+
+from .pretty_print import generate_table
+
 
 class TableD:
     """ tableD's main interface. """
@@ -73,3 +77,10 @@ class TableD:
 
         for row in rows:
             self.data.append(row)
+
+    def show(self) -> None:
+        """ Display the generated table to standard output. """
+
+        output = generate_table(self.headings, self.data, self.style)
+
+        print(output, file=sys.stdout)
