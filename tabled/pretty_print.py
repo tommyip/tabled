@@ -207,9 +207,9 @@ def generate_table(headings: List[Text],
         construct_row(divider, widths,
                       styling['divider'], margin=0),
 
-        # Actual table contents
-        *[construct_row(row, widths, styling['row'])
-          for row in table],
+        # Actual table body
+        '\n'.join([construct_row(row, widths, styling['row'])
+                   for row in table]),
 
         # Bottom border
         construct_row(divider, widths,
