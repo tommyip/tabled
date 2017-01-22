@@ -81,6 +81,13 @@ class TableD:
     def show(self) -> None:
         """ Display the generated table to standard output. """
 
+        self._data_2_str()
+
         output = generate_table(self.headings, self.data, self.style)
 
         print(output, file=sys.stdout)
+
+    def _data_2_str(self) -> None:
+        """ Convert all fields of the table to string type. """
+
+        self.data = [[str(cell) for cell in row] for row in self.data]

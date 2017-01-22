@@ -23,7 +23,7 @@ extremely flexible and configurable?
 Quick start:
 ```.py
 >>> headings = ['x', 'f(x) = x^2', 'f(x) = x^3']
->>> data = [[str(x), str(x ** 2), str(x ** 3)] for x in range(1, 6)]
+>>> data = [[x, x ** 2, x ** 3] for x in range(1, 6)]
 
 # Generate table!
 >>> TableD(headings, data, style='terminal').show()

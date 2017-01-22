@@ -53,7 +53,7 @@ class TestTableD:
 
     def test_show(self, capfd) -> None:
         headings = ['x', 'f : x -> x^x']
-        data = [[str(x), str(x ** x)] for x in range(1, 6)]
+        data = [[x, x ** x] for x in range(1, 6)]
 
         TableD(headings, data).show()
 
