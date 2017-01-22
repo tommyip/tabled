@@ -188,35 +188,32 @@ def generate_table(headings: List[Text],
         +---+------------+
     """
 
-    output = ''
-
     styling = get_style(style)
 
-    widths = columns_width([headings] + table)
-    widths_with_margin = [width + 2 for width in widths]
+    widths = [(width + 2) for width in columns_width([headings] + table)]
 
-    divider_row = [''.join(styling['raw']['horizontal']) * width
-                   for width in widths_with_margin]
+    divider = [''.join(styling['raw']['horizontal']) * width
+               for width in widths]
 
-    # Top border
-    output += construct_row(divider_row, widths_with_margin,
-                            styling['top_border'], margin=0) + '\n'
+    rows = [
+        # Top border
+        construct_row(divider, widths,
+                      styling['top_border'], margin=0),
 
-    # Header
-    output += construct_row(headings, widths_with_margin,
-                            styling['row']) + '\n'
+        # Headings
+        construct_row(headings, widths, styling['row']),
 
-    # Header/content divider
-    output += construct_row(divider_row, widths_with_margin,
-                            styling['divider'], margin=0) + '\n'
+        # Heading/body divider
+        construct_row(divider, widths,
+                      styling['divider'], margin=0),
 
-    # Table contents
-    for row in table:
-        output += construct_row(row, widths_with_margin,
-                                styling['row']) + '\n'
+        # Actual table contents
+        *[construct_row(row, widths, styling['row'])
+          for row in table],
 
-    # Bottom border
-    output += construct_row(divider_row, widths_with_margin,
-                            styling['bottom_border'], margin=0)
+        # Bottom border
+        construct_row(divider, widths,
+                      styling['bottom_border'], margin=0)
+    ]
 
-    return output
+    return '\n'.join(rows)
