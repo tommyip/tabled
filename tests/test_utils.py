@@ -7,7 +7,7 @@ tests.pretty_print
 :license: MIT
 """
 
-from tabled.utils import max_width, rotate_table, columns_width
+from tabled.utils import columns_width, max_width, rotate_table
 
 
 class TestMaxWidth:

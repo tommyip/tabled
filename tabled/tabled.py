@@ -7,7 +7,7 @@ tabled.tabled
 :license: MIT
 """
 
-from typing import List, Any, Text, Optional
+from typing import Any, List, Optional, Text
 
 
 class TableD:

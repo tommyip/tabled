@@ -7,10 +7,10 @@ tabled.pretty_print
 :license: MIT
 """
 
-from typing import Text, Dict, List
+from typing import Dict, List, Text
 
-from .utils import columns_width
 from .style_templates import get_style
+from .utils import columns_width
 
 
 def left_pad(string: Text, width: int) -> Text:
