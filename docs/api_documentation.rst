@@ -2,16 +2,37 @@
 API documentation
 =================
 
-This documentation shows all the public interfaces of tableD.
+The TableD object
+-----------------
+This is the main developer interface, all of tableD's functionality could be
+accessed through these methods.
+
+.. autoclass:: tabled.tabled.TableD
+    :members:
+
+
+All modules
+-----------
+Here contains the documentation for all objects and functions in tableD. Some
+are only intended for internel use, but there is nothing stopping you from
+repurposing them.
 
 .. automodule:: tabled.tabled
     :members:
+    :private-members:
+    :special-members:
 
 .. automodule:: tabled.pretty_print
     :members:
+    :private-members:
+    :special-members:
 
 .. automodule:: tabled.utils
     :members:
+    :private-members:
+    :special-members:
 
 .. automodule:: tabled.style_templates
     :members:
+    :private-members:
+    :special-members:
