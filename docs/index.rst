@@ -25,12 +25,16 @@ Quick start::
     ║ 5 ║ 25         ║ 125        ║
     ╚═══╩════════════╩════════════╝
 
-.. toctree::
-   :maxdepth: 3
 
-   installation
-   user_guide
-   api_documentation
-   contributors_guide
+Table Of Contents
+-----------------
+
+.. toctree::
+    :maxdepth: 3
+
+    installation
+    user_guide
+    api_documentation
+    contributors_guide
 
 .. _Github: https://github.com/tommyip/tabled

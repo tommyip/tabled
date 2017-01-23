@@ -4,7 +4,7 @@ API documentation
 
 The TableD object
 -----------------
-This is the main developer interface, all of tableD's functionality could be
+This is the main developer interface, all of tableD's functionality can be
 accessed through these methods.
 
 .. autoclass:: tabled.tabled.TableD
@@ -13,7 +13,7 @@ accessed through these methods.
 
 All modules
 -----------
-Here contains the documentation for all objects and functions in tableD. Some
+Here contains the documentation for all objects and functions in tableD. Most
 are only intended for internel use, but there is nothing stopping you from
 repurposing them.
 
