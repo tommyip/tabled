@@ -41,8 +41,8 @@ class TableD:
         """
 
         # Python gotcha: mutable default argument
-        self.headings = headings if headings else []
-        self.data = data if data else []
+        self.headings = headings or []
+        self.data = data or []
         self.style = style
         self.device = device
 
