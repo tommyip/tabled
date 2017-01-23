@@ -15,13 +15,15 @@ from .pretty_print import generate_table
 
 
 class TableD:
-    """ tableD's main interface.
+    """ The main interface to interact with a TableD object.
 
     Attributes:
         headings: Valid list of unicode strings for column headings.
         data: Nested list of cell data.
         style: Visual styling of the output table.
         device: Where should the output be presented.
+        _output (internal): Cached table string.
+        _cache_valid (internal): Validity of the cached table string.
 
     Example:
         >>> TableD(
@@ -44,6 +46,8 @@ class TableD:
         self.data = data or []
         self.style = style
         self.device = device
+        self._output = ''
+        self._cache_valid = False
 
     def add_row(self, row: List[Any]) -> None:
         """ Append a single row to data.
@@ -59,6 +63,7 @@ class TableD:
         """
 
         self.data.append(row)
+        self._cache_valid = False
 
     def add_rows(self, rows: List[List[Any]]) -> None:
         """ Append multiple rows to data.
@@ -77,16 +82,21 @@ class TableD:
         for row in rows:
             self.data.append(row)
 
+        self._cache_valid = False
+
     def show(self) -> None:
-        """ Display the generated table to standard output. """
+        """ Generate, cache and display table to standard output. Use cached
+        version if available. """
 
-        self._data_2_str()
+        self._all_to_str()
 
-        output = generate_table(self.headings, self.data, self.style)
+        if not self._cache_valid:
+            self._output = generate_table(self.headings, self.data, self.style)
+            self._cache_valid = True
 
-        print(output, file=sys.stdout)
+        print(self._output, file=sys.stdout)
 
-    def _data_2_str(self) -> None:
+    def _all_to_str(self) -> None:
         """ Convert all fields of the table to string type. """
 
         self.headings = [str(heading) for heading in self.headings]
