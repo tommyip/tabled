@@ -1,4 +1,3 @@
-==================
 Contributors guide
 ==================
 
@@ -6,7 +5,6 @@ Contributions are welcome! Before you submit a pull requests, please read the
 following guide to make sure your commits are ready to merge into our code
 base.
 
----------------
 Version control
 ---------------
 
@@ -60,7 +58,6 @@ Here are a few examples::
     table look better.
 
 
--------
 Testing
 -------
 
