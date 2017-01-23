@@ -9,6 +9,7 @@ init:
 	$(MAKE) update-dep
 
 update-dep:
+	pip install -r requirements.txt
 	pip install -r ./requirements/tests.txt
 	pip install -r ./requirements/docs.txt
 

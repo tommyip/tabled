@@ -1,5 +1,3 @@
--r ../requirements.txt
-
 # Generate documentation with Sphinx
 sphinx
 sphinx-autobuild
