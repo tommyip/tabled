@@ -22,16 +22,24 @@ class TableD:
         data: Nested list of cell data.
         style: Visual styling of the output table.
         device: Where should the output be presented.
-        _output (internal): Cached table string.
-        _cache_valid (internal): Validity of the cached table string.
+        _output (*internal*): Cached table string.
+        _cache_valid (*internal*): Validity of the cached table string.
 
     Example:
-        >>> TableD(
-        ...     ['Repo', 'Author', 'Url'],
-        ...     [['tableD', 'Me', 'http://github.com/tommyip/tabled'],
-        ...      ['Exmaple', 'Someone', 'http://example.com']]
+        >>> table = TableD(
+        ...     ['Repository', 'Author', 'Type'],
+        ...     [['tableD', 'Tommy Ip', 'Python library'],
+        ...      ['VueJS', 'Evan You', 'Frontend JS framework'],
+        ...      ['flask', 'Armin Ronacher', 'Web framework']]
         ... )
-        <tabled.tabled.TableD object at 0x...>
+        >>> table.show()
+        +------------+----------------+-----------------------+
+        | Repository | Author         | Type                  |
+        +------------+----------------+-----------------------+
+        | tableD     | Tommy Ip       | Python library        |
+        | VueJS      | Evan You       | Frontend JS framework |
+        | flask      | Armin Ronacher | Web framework         |
+        +------------+----------------+-----------------------+
     """
 
     def __init__(self,
