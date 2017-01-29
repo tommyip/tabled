@@ -21,7 +21,7 @@ simple API, you can generate fancy tables in no time! And did I mention it is
 extremely flexible and configurable?
 
 Quick start:
-```.py
+```python
 >>> headings = ['x', 'f(x) = x^2', 'f(x) = x^3']
 >>> data = [[x, x ** 2, x ** 3] for x in range(1, 6)]
 
