@@ -4,3 +4,5 @@ sphinx-autobuild
 
 # Google style docstrings
 sphinxcontrib-napoleon
+
+typing
