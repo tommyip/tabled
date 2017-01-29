@@ -38,6 +38,7 @@ class TestTableD:
         table.add_row(data)
 
         assert table.data == [data]
+        assert table._cache_valid is False
 
     def test_add_row_2(self) -> None:
         datas = [['x1', 'x2', 'x3'],
@@ -50,6 +51,16 @@ class TestTableD:
             table.add_row(data)
 
         assert table.data == datas
+        assert table._cache_valid is False
+
+    def test_set_headings(self) -> None:
+        headings = ['Heading 1', 2, 3, 'final heading']
+
+        table = TableD()
+        table.set_headings(headings)
+
+        assert table.headings == ['Heading 1', 2, 3, 'final heading']
+        assert table._cache_valid is False
 
     def test_show(self, capfd) -> None:
         headings = ['x', 'f : x -> x^x']

@@ -18,7 +18,7 @@ class TableD:
     """ The main interface to interact with a TableD object.
 
     Attributes:
-        headings: Valid list of unicode strings for column headings.
+        headings: List of column headings.
         data: Nested list of cell data.
         style: Visual styling of the output table.
         device: Where should the output be presented.
@@ -43,7 +43,7 @@ class TableD:
     """
 
     def __init__(self,
-                 headings: Optional[List[Text]] = None,
+                 headings: Optional[List[Any]] = None,
                  data: Optional[List[List[Any]]] = None,
                  style: Text = 'default',
                  device: Text = 'stdout') -> None:
@@ -90,6 +90,23 @@ class TableD:
         for row in rows:
             self.data.append(row)
 
+        self._cache_valid = False
+
+    def set_headings(self, headings: List[Any]) -> None:
+        """ Set the headings of the table. Override original headings if it
+        exist.
+
+        Args:
+            headings: A list of column headings.
+
+        Example:
+            >>> table = TableD()
+            >>> table.set_headings(['id', 2, 3])
+            >>> table.headings
+            ['id', 2, 3]
+        """
+
+        self.headings = headings
         self._cache_valid = False
 
     def show(self) -> None:
