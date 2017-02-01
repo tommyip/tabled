@@ -27,7 +27,9 @@ class TestTableD:
         table = TableD(headings, data, 'fancy', 'rst')
 
         assert table.headings == headings
-        assert table.data == data
+        assert table.data == \
+            [['Tommy Ip', '17', 'hkmp7tommy@gmail.com', 'example.com'],
+             ['Someone', '23', 'someone@example.com', 'me.example.net']]
         assert table.style == 'fancy'
         assert table.device == 'rst'
 
@@ -59,7 +61,7 @@ class TestTableD:
         table = TableD()
         table.set_headings(headings)
 
-        assert table.headings == ['Heading 1', 2, 3, 'final heading']
+        assert table.headings == ['Heading 1', '2', '3', 'final heading']
         assert table._cache_valid is False
 
     def test_show(self, capfd) -> None:

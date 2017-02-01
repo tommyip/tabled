@@ -12,16 +12,17 @@ from typing import Any, List, Optional, Text
 import sys
 
 from .pretty_print import generate_table
+from .utils import str_list, str_nested_list
 
 
 class TableD:
-    """ The main interface to interact with a TableD object.
+    """ TableD object which provide an interface to the public.
 
     Attributes:
-        headings: List of column headings.
-        data: Nested list of cell data.
-        style: Visual styling of the output table.
-        device: Where should the output be presented.
+        headings: A list of column headings which may contain any type.
+        data: Nested list of lists, each cell element may contain any type.
+        style: Style of pretty printed table.
+        device: Output device.
         _output (*internal*): Cached table string.
         _cache_valid (*internal*): Validity of the cached table string.
 
@@ -47,13 +48,14 @@ class TableD:
                  data: Optional[List[List[Any]]] = None,
                  style: Text = 'default',
                  device: Text = 'stdout') -> None:
-        """ Initialize data storage engine for TableD. """
+        """ Initialize data storage engine for TableD. You should use
+        tabled.new() to construct a TableD object. """
 
-        # Python gotcha: mutable default argument
-        self.headings = headings or []
-        self.data = data or []
+        self.headings = str_list(headings) if headings else []
+        self.data = str_nested_list(data) if data else []
         self.style = style
         self.device = device
+
         self._output = ''
         self._cache_valid = False
 
@@ -70,7 +72,7 @@ class TableD:
             [['x1', 'x2', 'x3']]
         """
 
-        self.data.append(row)
+        self.data.append(str_list(row))
         self._cache_valid = False
 
     def add_rows(self, rows: List[List[Any]]) -> None:
@@ -87,9 +89,7 @@ class TableD:
             [['x1', 'x2', 'x3'], ['y1', 'y2', 'y3']]
         """
 
-        for row in rows:
-            self.data.append(row)
-
+        self.data += str_nested_list(rows)
         self._cache_valid = False
 
     def set_headings(self, headings: List[Any]) -> None:
@@ -103,26 +103,18 @@ class TableD:
             >>> table = TableD()
             >>> table.set_headings(['id', 2, 3])
             >>> table.headings
-            ['id', 2, 3]
+            ['id', '2', '3']
         """
 
-        self.headings = headings
+        self.headings = str_list(headings)
         self._cache_valid = False
 
     def show(self) -> None:
         """ Generate, cache and display table to standard output. Use cached
         version if available. """
 
-        self._all_to_str()
-
         if not self._cache_valid:
             self._output = generate_table(self.headings, self.data, self.style)
             self._cache_valid = True
 
         print(self._output, file=sys.stdout)
-
-    def _all_to_str(self) -> None:
-        """ Convert all fields of the table to string type. """
-
-        self.headings = [str(heading) for heading in self.headings]
-        self.data = [[str(cell) for cell in row] for row in self.data]

@@ -164,7 +164,7 @@ def construct_row(row: List[Text],
 def generate_table(headings: List[Text],
                    table: List[List[Text]],
                    style: str = 'default') -> Text:
-    """ Generate pretty printed table.
+    """ This is where the magic happens!
 
     Args:
         headings: A list of text containing the headings.

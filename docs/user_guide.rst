@@ -7,17 +7,18 @@ User guide
 tableD has a very simple interface. This guide covers almost everything there
 is to produce pretty printed tables with tableD.
 
-To import tableD, simply put this together with your other dependencies::
+Importing tabled is as simple as::
 
-    from tabled import TableD
+    import tabled
 
+Creating a new table
+--------------------
+The *TableD* object is the main interface for visualizing your data. You can
+create a tabled object using the ``new`` function and ``show`` to display it
+to standard output::
 
-Initializing a TableD object
-----------------------------
-The *TableD* object is main interface between your input data and the visual
-output. The quickest way to produce a table is as follows::
-
-    >>> TableD(['Heading 1', 'Heading 2'], [[1, 2], [3, 4]]).show()
+    >>> tabled.new(['Heading 1', 'Heading 2'],
+                   [[1, 2], [3, 4]]).show()
     +-----------+-----------+
     | Heading 1 | Heading 2 |
     +-----------+-----------+
@@ -25,21 +26,70 @@ output. The quickest way to produce a table is as follows::
     | 3         | 4         |
     +-----------+-----------+
 
-Lets break this down. First, we initialized a TableD object with two arguments.
-The first one is the headings of the table, which is a list::
+Lets break this down. The ``new`` function creates and returns a TableD object,
+it accepts a list of headings, a nested lists of cell data, the style of the
+output and device to be outputted to.
 
-    ['Heading 1', 'Heading 2']
+Headings
+""""""""
 
-The contents of the headings could be in any type as they would get converted
-to ``str`` during table generation; The second argument is the data for the
-table body, which should be a nested list of lists. Again, the input types does
-not matter::
+The ``heading`` argument should be a list of elements, which could be in any
+Python type. Examples::
 
-    [[1, 2], [3, 4]]
+    ['Heading 1', 'Heading 2', some_variable, 10, True]
 
-As shown in the example, the cell contents are left aligned. This is configured
-by the style used, which is ``default`` by default. There are only two styles
-available for now (default and terminal), but you are welcome to help create
-more! You could set the style as a optional argument to the TableD object::
+    [x for x in range(10)]  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-    TableD(<headings>, <body>, style='terminal')
+Data
+""""
+
+The second argument, ``data``, is a nested list of lists containing cell data
+for the table body. Same as the headings, each cell element could be in any
+Python types. Examples::
+
+    [[1, 2], [3, 4], ["Cell 5", 6], [True, False]]
+
+    [[x, x+1] for x in range(3)]  # [[0, 1], [1, 2], [2, 3]]
+
+Style
+"""""
+
+The style of the table is configured through the ``style`` argument, which is
+*default* for default. There are only two styles available for now, but you
+are welcome to help create more, see
+:doc:`Contributors Guide<contributors_guide>` for more information.
+
+.. code-block:: python
+
+    headings = ['x', 'y1', 'y2']
+    data = [[x, x*x, x**3] for x in range(3)]
+
+Default::
+
+    >>> tabled.new(headings, data).show()
+    +---+----+----+
+    | x | y1 | y2 |
+    +---+----+----+
+    | 0 | 0  | 0  |
+    | 1 | 1  | 1  |
+    | 2 | 4  | 8  |
+    +---+----+----+
+
+Terminal::
+
+    >>> tabled.new(headings, data, style='terminal').show()
+    ╔═══╦════╦════╗
+    ║ x ║ y1 ║ y2 ║
+    ╠═══╬════╬════╣
+    ║ 0 ║ 0  ║ 0  ║
+    ║ 1 ║ 1  ║ 1  ║
+    ║ 2 ║ 4  ║ 8  ║
+    ╚═══╩════╩════╝
+
+Device
+""""""
+
+The ``device`` argument controls where the output is shown. The default is
+``stdout``, which is your terminal or python shell.
+
+*More device options are coming soon...*

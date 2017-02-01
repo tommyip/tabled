@@ -7,7 +7,7 @@ tabled.utils
 :license: MIT
 """
 
-from typing import List, Text
+from typing import List, Text, Any
 
 
 def max_width(column: List[Text]) -> int:
@@ -77,3 +77,15 @@ def columns_width(table: List[List[Text]]) -> List[int]:
     rotated_table = rotate_table(table)
 
     return list(map(max_width, rotated_table))
+
+
+def str_list(raw_list: List[Any]) -> List[Text]:
+    """ Convert all element in a list to Text type. """
+
+    return [str(item) for item in raw_list]
+
+
+def str_nested_list(nested_raw_list: List[List[Any]]) -> List[List[Text]]:
+    """ Convert all element in a nested list to Text type. """
+
+    return [[str(item) for item in raw_list] for raw_list in nested_raw_list]
