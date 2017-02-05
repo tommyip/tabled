@@ -5,17 +5,20 @@ API documentation
 The TableD object
 -----------------
 This is the main developer interface, all of tableD's functionality can be
-accessed through these methods.
+accessed through these 5 methods.
 
-.. autoclass:: tabled.tabled.TableD
-    :members:
+.. module:: tabled
+
+.. autofunction:: new
+.. automethod:: TableD.add_row
+.. automethod:: TableD.add_rows
+.. automethod:: TableD.set_headings
+.. automethod:: TableD.show
 
 
 All modules
 -----------
-Here contains the documentation for all objects and functions in tableD. Most
-are only intended for internel use, but there is nothing stopping you from
-repurposing them.
+Here are the documentations for all modules in TableD, internal or not.
 
 .. automodule:: tabled.tabled
     :members:
