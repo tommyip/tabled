@@ -9,7 +9,7 @@ tests.pretty_print
 
 import pytest
 
-from tabled.pretty_print import (construct_row, generate_table, left_pad,
+from tabled.pretty_print import (render_row, generate_table, left_pad,
                                  left_right_pad, pad, right_pad)
 
 
@@ -74,8 +74,8 @@ class TestConstructRow:
         row = ['Python', 'PyPy', 'RPython', 'Jython', 'Cython']
         widths = [10, 11, 9, 11, 9]
 
-        output = construct_row(row, widths,
-                               dict(left='|', connector='|', right='|'))
+        output = render_row(row, widths,
+                            dict(left='|', connector='|', right='|'))
         expected = '| Python   | PyPy      | RPython | Jython    | Cython  |'
 
         assert output == expected
@@ -84,8 +84,8 @@ class TestConstructRow:
         row = ['', '', '', '', '']
         widths = [2, 2, 2, 2, 2]
 
-        output = construct_row(row, widths,
-                               dict(left='|', connector=':', right='|'))
+        output = render_row(row, widths,
+                            dict(left='|', connector=':', right='|'))
 
         assert output == '|  :  :  :  :  |'
 

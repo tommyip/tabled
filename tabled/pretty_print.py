@@ -125,11 +125,11 @@ def pad(string: Text,
     return left_right_pad(padded, len(padded) + (margin * 2))
 
 
-def construct_row(row: List[Text],
-                  widths: List[int],
-                  delimiters: Dict[str, Text],
-                  align: Text = 'left',
-                  margin: int = 1) -> Text:
+def render_row(row: List[Text],
+               widths: List[int],
+               delimiters: Dict[str, Text],
+               align: Text = 'left',
+               margin: int = 1) -> Text:
     """ Render a table row.
 
     Args:
@@ -143,7 +143,7 @@ def construct_row(row: List[Text],
         A string containing a print ready row.
 
     Example:
-        >>> construct_row(['Some cell content', 'word', '1'], [22, 6, 7],
+        >>> render_row(['Some cell content', 'word', '1'], [22, 6, 7],
         ...               {'left': '|', 'right': '|', 'connector': '|'})
         '| Some cell content    | word | 1     |'
     """
@@ -196,23 +196,19 @@ def generate_table(headings: List[Text],
 
     rows = [
         # Top border
-        construct_row(divider, widths,
-                      styling['top_border'], margin=0),
+        render_row(divider, widths, styling['top_border'], margin=0),
 
         # Headings
-        construct_row(headings, widths, styling['row']),
+        render_row(headings, widths, styling['row']),
 
         # Heading/body divider
-        construct_row(divider, widths,
-                      styling['divider'], margin=0),
+        render_row(divider, widths, styling['divider'], margin=0),
 
         # Actual table body
-        '\n'.join([construct_row(row, widths, styling['row'])
-                   for row in table]),
+        '\n'.join([render_row(row, widths, styling['row']) for row in table]),
 
         # Bottom border
-        construct_row(divider, widths,
-                      styling['bottom_border'], margin=0)
+        render_row(divider, widths, styling['bottom_border'], margin=0)
     ]
 
     return '\n'.join(rows)
