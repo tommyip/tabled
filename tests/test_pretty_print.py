@@ -9,7 +9,7 @@ tests.pretty_print
 
 import pytest
 
-from tabled.pretty_print import (render_row, generate_table, left_pad,
+from tabled.pretty_print import (render_row, render_table, left_pad,
                                  left_right_pad, pad, right_pad)
 
 
@@ -97,8 +97,8 @@ class TestGenerateTable:
 
     def test_style_default(self) -> None:
 
-        generated_table = generate_table(TestGenerateTable.SIMPLE_HEADING,
-                                         TestGenerateTable.SIMPLE_TABLE)
+        generated_table = render_table(TestGenerateTable.SIMPLE_HEADING,
+                                       TestGenerateTable.SIMPLE_TABLE)
 
         assert generated_table == ('+---+------------+\n'
                                    '| x | f(x) = x^3 |\n'
@@ -111,9 +111,9 @@ class TestGenerateTable:
                                    '+---+------------+')
 
     def test_style_terminal(self) -> None:
-        generated_table = generate_table(TestGenerateTable.SIMPLE_HEADING,
-                                         TestGenerateTable.SIMPLE_TABLE,
-                                         style='terminal')
+        generated_table = render_table(TestGenerateTable.SIMPLE_HEADING,
+                                       TestGenerateTable.SIMPLE_TABLE,
+                                       style='terminal')
 
         assert generated_table == ('╔═══╦════════════╗\n'
                                    '║ x ║ f(x) = x^3 ║\n'
@@ -149,4 +149,4 @@ class TestGenerateTable:
                     '║ Relational ║                ║ Microsoft SQL Server ║\n'
                     '╚════════════╩════════════════╩══════════════════════╝')
 
-        assert generate_table(headings, table, style='terminal') == expected
+        assert render_table(headings, table, style='terminal') == expected

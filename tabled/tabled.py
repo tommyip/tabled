@@ -11,7 +11,7 @@ from typing import Any, List, Optional, Text
 
 import sys
 
-from .pretty_print import generate_table
+from .pretty_print import render_table
 from .utils import str_list, str_nested_list
 
 
@@ -114,7 +114,7 @@ class TableD:
         version if available. """
 
         if not self._cache_valid:
-            self._output = generate_table(self.headings, self.data, self.style)
+            self._output = render_table(self.headings, self.data, self.style)
             self._cache_valid = True
 
         print(self._output, file=sys.stdout)

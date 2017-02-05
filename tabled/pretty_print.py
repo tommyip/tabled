@@ -160,14 +160,14 @@ def render_row(row: List[Text],
     )
 
 
-def generate_table(headings: List[Text],
-                   table: List[List[Text]],
-                   style: str = 'default') -> Text:
+def render_table(headings: List[Text],
+                 table: List[List[Text]],
+                 style: str = 'default') -> Text:
     """ This is where the magic happens!
 
     Args:
         headings: A list of text containing the headings.
-        table: Cells data in a nested list of list structure.
+        table: Cells data in a nested list of lists structure.
         style: Style of formatting in the table.
 
     Returns:
@@ -177,7 +177,7 @@ def generate_table(headings: List[Text],
         >>> table = [['1', '1'],
         ...          ['2', '4'],
         ...          ['3', '9']]
-        >>> print(generate_table(['x', 'f(x) = x^2'], table))
+        >>> print(render_table(['x', 'f(x) = x^2'], table))
         +---+------------+
         | x | f(x) = x^2 |
         +---+------------+
