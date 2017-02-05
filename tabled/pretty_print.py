@@ -14,14 +14,14 @@ from .utils import columns_width
 
 
 def left_pad(string: Text, width: int) -> Text:
-    """ Left pad a string in a container.
+    """ Insert spaces to the left of a string to fit into a container.
 
     Args:
         string: A text value to be padded with spaces.
         width: The width of the string container.
 
     Returns:
-        A string `width` wide with `string` aligned right.
+        A string aligned right in a container.
 
     Example:
         >>> left_pad('tableD', 10)
@@ -38,14 +38,14 @@ def left_pad(string: Text, width: int) -> Text:
 
 
 def right_pad(string: Text, width: int) -> Text:
-    """ Right pad a string in a container.
+    """ Insert spaces to the right of a string to fit into a container.
 
     Args:
         string: A text value to be padded with spaces.
         width: The width of the string container.
 
     Returns:
-        A string `width` wide with `string` aligned left.
+        A string aligned left in a container.
 
     Example:
         >>> right_pad('tableD', 10)
@@ -62,18 +62,18 @@ def right_pad(string: Text, width: int) -> Text:
 
 
 def left_right_pad(string: Text, width: int) -> Text:
-    """ Insert padding in both side of a string inside a container.
+    """ Insert spaces to both sides of a string to fit into a container.
 
     Note:
-        If the size of the padding cannot be divided equally by 2, the right
-        side would be allocated with more spaces.
+        The right side of the string would be allocated more spaces if the
+        amount of blank spaces cannot be divided equally by 2.
 
     Args:
         string: A text value to be padded with spaces.
         width: The width of the string container.
 
     Returns:
-        A string `width` wide with `string` aligned center.
+        A string aligned center in a container.
 
     Example:
         >>> left_right_pad('tableD', 11)
@@ -122,7 +122,6 @@ def pad(string: Text,
 
     padded = pad_string[align](string, width_no_margin)
 
-    # Use left_right_pad to insert margin
     return left_right_pad(padded, len(padded) + (margin * 2))
 
 
@@ -131,7 +130,7 @@ def construct_row(row: List[Text],
                   delimiters: Dict[str, Text],
                   align: Text = 'left',
                   margin: int = 1) -> Text:
-    """ Construct a string representation of a row in a table.
+    """ Render a table row.
 
     Args:
         row: A row of string, each is a cell of their columns.

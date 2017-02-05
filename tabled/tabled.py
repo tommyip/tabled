@@ -16,7 +16,7 @@ from .utils import str_list, str_nested_list
 
 
 class TableD:
-    """ TableD object which provide an interface to the public.
+    """ Public interface for the central table abstraction.
 
     Attributes:
         headings: A list of column headings which may contain any type.
@@ -60,7 +60,7 @@ class TableD:
         self._cache_valid = False
 
     def add_row(self, row: List[Any]) -> None:
-        """ Append a single row to data.
+        """ Append a single row to table body.
 
         Args:
             row: A row of data to be appended to the table.
@@ -76,7 +76,7 @@ class TableD:
         self._cache_valid = False
 
     def add_rows(self, rows: List[List[Any]]) -> None:
-        """ Append multiple rows to data.
+        """ Append multiple rows to table body.
 
         Args:
             rows: Multiple rows of data to be appended to table.
@@ -93,8 +93,8 @@ class TableD:
         self._cache_valid = False
 
     def set_headings(self, headings: List[Any]) -> None:
-        """ Set the headings of the table. Override original headings if it
-        exist.
+        """ Set the headings of the table. Override the original headings if it
+        existed.
 
         Args:
             headings: A list of column headings.

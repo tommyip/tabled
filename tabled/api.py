@@ -16,8 +16,8 @@ def new(headings: Optional[List[Any]] = None,
         data: Optional[List[List[Any]]] = None,
         style: Text = 'default',
         device: Text = 'stdout') -> TableD:
-    """ This is the entry point to TableD. This should be use to initialize a
-    TableD object instead of calling TableD.__init__() directly.
+    """ Creates a new TableD object. This should be used instead of calling
+    TableD's __init__() directly.
 
     Args:
         headings: A list of column headings which may contain any type.

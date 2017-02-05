@@ -29,10 +29,7 @@ def max_width(column: List[Text]) -> int:
 
 
 def rotate_table(table: List[List[Text]]) -> List[List[Text]]:
-    """ Rotate table so that each row contains element from the same column.
-
-    Rotate a nested list such that the columns become rows, allowing the
-    maximum length of each column to be calcuated.
+    """ Transform rows to columns and columns to rows.
 
     Args:
         table: Nested list of lists that is represented as a table structure.
@@ -80,12 +77,12 @@ def columns_width(table: List[List[Text]]) -> List[int]:
 
 
 def str_list(raw_list: List[Any]) -> List[Text]:
-    """ Convert all element in a list to Text type. """
+    """ Cast all elements in a list to Text type. """
 
     return [str(item) for item in raw_list]
 
 
 def str_nested_list(nested_raw_list: List[List[Any]]) -> List[List[Text]]:
-    """ Convert all element in a nested list to Text type. """
+    """ Cast all elements in a nested list to Text type. """
 
     return [[str(item) for item in raw_list] for raw_list in nested_raw_list]
