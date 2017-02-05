@@ -7,7 +7,7 @@ tabled.utils
 :license: MIT
 """
 
-from typing import List, Text, Any
+from typing import Any, List, Text
 
 
 def max_width(column: List[Text]) -> int:

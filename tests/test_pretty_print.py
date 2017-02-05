@@ -9,8 +9,8 @@ tests.pretty_print
 
 import pytest
 
-from tabled.pretty_print import (render_row, render_table, left_pad,
-                                 left_right_pad, pad, right_pad)
+from tabled.pretty_print import (left_pad, left_right_pad, pad, render_row,
+                                 render_table, right_pad)
 
 
 class TestLeftPad:

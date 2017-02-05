@@ -7,7 +7,7 @@ tabled.api
 :license: MIT
 """
 
-from typing import Optional, List, Any, Text
+from typing import Any, List, Optional, Text
 
 from .tabled import TableD
 

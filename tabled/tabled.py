@@ -7,9 +7,8 @@ tabled.tabled
 :license: MIT
 """
 
-from typing import Any, List, Optional, Text
-
 import sys
+from typing import Any, List, Optional, Text
 
 from .pretty_print import render_table
 from .utils import str_list, str_nested_list
