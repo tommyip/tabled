@@ -2,10 +2,10 @@
 API documentation
 =================
 
-The TableD object
------------------
-This is the main developer interface, all of tableD's functionality can be
-accessed through these 5 methods.
+Public interface
+----------------
+Here is the documentation for the public API, all of the library's
+functionality can be accessed through these 5 methods.
 
 .. module:: tabled
 
@@ -16,9 +16,9 @@ accessed through these 5 methods.
 .. automethod:: TableD.show
 
 
-All modules
------------
-Here are the documentations for all modules in TableD, internal or not.
+Internals
+---------
+Here is the documentation for all modules.
 
 .. automodule:: tabled.tabled
     :members:
