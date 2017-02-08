@@ -86,3 +86,21 @@ def str_nested_list(nested_raw_list: List[List[Any]]) -> List[List[Text]]:
     """ Cast all elements in a nested list to Text type. """
 
     return [[str(item) for item in raw_list] for raw_list in nested_raw_list]
+
+
+def normalize_list(row: List[Text], size: int) -> List[Text]:
+    """ Make a row the same length as other rows by filling in blank
+    spaces.
+
+    Args:
+        row: A list of string to be normalized
+        size: The length of the final list
+
+    Returns:
+        A list with of length `size` with blank element filled with "". Trim
+        any extra elements if the list is longer than `size`.
+    """
+
+    missing_columns = size - len(row)
+
+    return row[:size] + [''] * missing_columns

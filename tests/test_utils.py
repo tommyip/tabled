@@ -7,7 +7,8 @@ tests.pretty_print
 :license: MIT
 """
 
-from tabled.utils import columns_width, max_width, rotate_table
+from tabled.utils import (columns_width, max_width,
+                          rotate_table, normalize_list)
 
 
 class TestMaxWidth:
@@ -72,3 +73,23 @@ class TestColumnsWidth:
                  ['', '', '', '', '']]
 
         assert columns_width(table) == [0, 0, 0, 0, 0]
+
+
+class TestNormalizeList:
+
+    def test_normal(self) -> None:
+        list_raw = ['a', 'b', 'c', 'd']
+        list_expected = ['a', 'b', 'c', 'd', '', '', '']
+
+        assert normalize_list(list_raw, 7) == list_expected
+
+    def test_same_length(self) -> None:
+        list_raw = ['1', '2', '3', '4', '5', '6', '7']
+
+        assert normalize_list(list_raw, 7) == list_raw
+
+    def test_shorter(self) -> None:
+        list_raw = ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5']
+        list_expected = ['Cell 1', 'Cell 2', 'Cell 3', 'Cell 4']
+
+        assert normalize_list(list_raw, 4) == list_expected

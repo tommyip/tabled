@@ -11,7 +11,7 @@ import sys
 from typing import Any, List, Optional, Text
 
 from .pretty_print import render_table
-from .utils import str_list, str_nested_list
+from .utils import str_list, str_nested_list, normalize_list
 
 
 class TableD:
@@ -22,8 +22,10 @@ class TableD:
         data: Nested list of lists, each cell element may contain any type.
         style: Style of pretty printed table.
         device: Output device.
-        _output (*internal*): Cached table string.
-        _cache_valid (*internal*): Validity of the cached table string.
+
+        _columns: The number of columns the table have.
+        _output: Cached table string.
+        _cache_valid: Validity of the cached table string.
 
     Example:
         >>> table = TableD(
@@ -55,6 +57,7 @@ class TableD:
         self.style = style
         self.device = device
 
+        self._columns = len(self.headings)
         self._output = ''
         self._cache_valid = False
 
@@ -106,6 +109,7 @@ class TableD:
         """
 
         self.headings = str_list(headings)
+        self._columns = len(headings)
         self._cache_valid = False
 
     def show(self) -> None:
@@ -113,6 +117,8 @@ class TableD:
         version if available. """
 
         if not self._cache_valid:
+            self.data = [normalize_list(row, self._columns)
+                         for row in self.data]
             self._output = render_table(self.headings, self.data, self.style)
             self._cache_valid = True
 
