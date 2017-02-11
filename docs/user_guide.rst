@@ -7,15 +7,15 @@ User guide
 tableD has a very simple interface. This guide covers almost everything there
 is to produce pretty printed tables with tableD.
 
-Importing tabled is as simple as::
+Creating a new table
+--------------------
+
+First, import the tabled package::
 
     import tabled
 
-Creating a new table
---------------------
-The *TableD* object is the main interface for visualizing your data. You can
-create a tabled object using the ``new`` function and ``show`` to display it
-to standard output::
+The *TableD* object is the main interface for visualizing your data, you can
+create a new instance using the ``new`` function::
 
     >>> tabled.new(['Heading 1', 'Heading 2'],
                    [[1, 2], [3, 4]]).show()
@@ -27,8 +27,7 @@ to standard output::
     +-----------+-----------+
 
 Lets break this down. The ``new`` function creates and returns a TableD object,
-it accepts a list of headings, a nested lists of cell data, the style of the
-output and device to be outputted to.
+which accepts 4 optional arguments.
 
 Headings
 """"""""
@@ -93,3 +92,52 @@ The ``device`` argument controls where the output is shown. The default is
 ``stdout``, which is your terminal or python shell.
 
 *More device options are coming soon...*
+
+Displaying the table
+--------------------
+
+The ``.show()`` method displays your table to standard output by default. It
+supports caching, so it would rerender your data only if they were modified.
+
+Modification after initialization
+---------------------------------
+
+The arguments to ``tabled.new()`` are optional as mentioned above, they could
+be added or changed after the initialization of a new tabled instance. Although
+you can modify the fields directly like any other Python objects, using the
+setter methods are recommended since they validate and convert your data to
+strings.
+
+To set the headings of your table, use the ``.set_headings()`` method::
+
+    >>> t = tabled.new()
+
+    >>> t.set_headings(['Language', 'Typing', 'Runtime', 'Type'])
+
+Adding a new row is similar, you can use the ``.add_row()`` method, which
+accepts a list of items::
+
+    >>> t.add_row(['Python', 'Dynamic', 'CPython', 'OOP'])
+
+There is also a ``.add_rows()`` method that allows multiple rows to be added,
+in the form of a nested list::
+
+    >>> t.add_rows([
+        ['Java', 'Static', 'JVM', 'OOP'],
+        ['Elixir', 'Dynamic', 'BEAM', 'Functional']
+    ])
+
+.. note:: The number of columns of your table is determined by the headings.
+          If any of your rows is shorter than the headings, blank cells would
+          be appended to the end of the row.
+
+If you now display the table, you will get::
+
+    >>> t.show()
+    +----------+---------+---------+------------+
+    | Language | Typing  | Runtime | Type       |
+    +----------+---------+---------+------------+
+    | Python   | Dynamic | CPython | OOP        |
+    | Java     | Static  | JVM     | OOP        |
+    | Elixir   | Dynamic | BEAM    | Functional |
+    +----------+---------+---------+------------+
