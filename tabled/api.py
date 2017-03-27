@@ -16,7 +16,8 @@ def new(headings: Optional[List[Any]] = None,
         data: Optional[List[List[Any]]] = None,
         style: Text = 'default',
         align: Text = None,
-        device: Text = 'stdout') -> TableD:
+        device: Text = 'stdout',
+        dataframe=None) -> TableD:  # mypy: ignore
     """ Creates a new TableD object. This should be used instead of calling
     TableD's __init__() directly.
 
@@ -27,6 +28,7 @@ def new(headings: Optional[List[Any]] = None,
         align: Align cell content to either left, center or right. Default to
                setting specified in style.
         device: Where to output pretty printed table.
+        dataframe: existing pandas dataframe object.
 
     Returns:
         A TableD object.
@@ -35,5 +37,9 @@ def new(headings: Optional[List[Any]] = None,
         >>> new()
         <tabled.tabled.TableD object at 0x...>
     """
+
+    if dataframe is not None:
+        headings = list(dataframe.columns)
+        data = dataframe.values.tolist()
 
     return TableD(headings or [], data or [], style, align, device)

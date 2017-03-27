@@ -9,3 +9,6 @@ mypy
 
 # Flake8 for linting
 flake8
+
+# For dataframe testing
+pandas
