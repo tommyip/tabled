@@ -1,2 +1,2 @@
-from .api import new
+from .api import *
 from .tabled import TableD
