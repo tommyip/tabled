@@ -35,9 +35,10 @@ def new(headings: Optional[List[Any]] = None,
 
     return TableD(headings or [], data or [], style, device)
 
+
 def new_from_df(dataframe,
-        style: Text = 'default',
-        device: Text = 'stdout') -> TableD:
+                style: Text = 'default',
+                device: Text = 'stdout') -> TableD:
 
     """ Creates a new TableD object. This should be used instead of calling
     TableD's __init__() directly.
