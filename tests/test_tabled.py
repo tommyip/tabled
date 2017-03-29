@@ -10,7 +10,6 @@ tests.tabled
 from tabled.tabled import TableD
 
 
-
 class TestTableD:
     def test_create_new_table_blank(self) -> None:
         table = TableD()
