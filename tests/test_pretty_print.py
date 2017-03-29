@@ -65,7 +65,7 @@ class TestPad:
         assert pad('Some string', 16, 'center') == '  Some string   '
 
     def test_margin(self) -> None:
-        assert pad('example.com', 15, margin=2) == '  example.com  '
+        assert pad('example.com', 15, 'left', margin=2) == '  example.com  '
 
 
 class TestConstructRow:
@@ -73,10 +73,15 @@ class TestConstructRow:
     def test_normal(self) -> None:
         row = ['Python', 'PyPy', 'RPython', 'Jython', 'Cython']
         widths = [10, 11, 9, 11, 9]
+        style = dict(left='|', connector='|', right='|')
 
-        output = render_row(row, widths,
-                            dict(left='|', connector='|', right='|'))
+        output = render_row(row, widths, style)
         expected = '| Python   | PyPy      | RPython | Jython    | Cython  |'
+
+        assert output == expected
+
+        output = render_row(row, widths, style, align='right')
+        expected = '|   Python |      PyPy | RPython |    Jython |  Cython |'
 
         assert output == expected
 

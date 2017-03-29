@@ -15,15 +15,18 @@ from .tabled import TableD
 def new(headings: Optional[List[Any]] = None,
         data: Optional[List[List[Any]]] = None,
         style: Text = 'default',
+        align: Text = None,
         device: Text = 'stdout') -> TableD:
     """ Creates a new TableD object. This should be used instead of calling
     TableD's __init__() directly.
 
     Args:
-        headings: A list of column headings which may contain any type.
-        data: Nested list of lists, each cell element may contain any type.
-        style: Style of pretty printed table.
-        device: Output device.
+        headings: A list of column headings.
+        data: Nested list of lists of cell contents.
+        style: Style of pretty printer.
+        align: Align cell content to either left, center or right. Default to
+               setting specified in style.
+        device: Where to output pretty printed table.
 
     Returns:
         A TableD object.
@@ -33,4 +36,4 @@ def new(headings: Optional[List[Any]] = None,
         <tabled.tabled.TableD object at 0x...>
     """
 
-    return TableD(headings or [], data or [], style, device)
+    return TableD(headings or [], data or [], style, align, device)

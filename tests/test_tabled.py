@@ -24,13 +24,14 @@ class TestTableD:
         data = [['Tommy Ip', 17, 'hkmp7tommy@gmail.com', 'example.com'],
                 ['Someone', 23, 'someone@example.com', 'me.example.net']]
 
-        table = TableD(headings, data, 'fancy', 'rst')
+        table = TableD(headings, data, 'fancy', 'right', 'rst')
 
         assert table.headings == headings
         assert table.data == \
             [['Tommy Ip', '17', 'hkmp7tommy@gmail.com', 'example.com'],
              ['Someone', '23', 'someone@example.com', 'me.example.net']]
         assert table.style == 'fancy'
+        assert table.align == 'right'
         assert table.device == 'rst'
 
     def test_add_row_1(self) -> None:

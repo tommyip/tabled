@@ -7,7 +7,7 @@ tabled.pretty_print
 :license: MIT
 """
 
-from typing import Dict, List, Text
+from typing import Dict, List, Text, Optional
 
 from .style_templates import get_style
 from .utils import columns_width
@@ -93,7 +93,7 @@ def left_right_pad(string: Text, width: int) -> Text:
 
 def pad(string: Text,
         width: int,
-        align: Text = 'left',
+        align: Text,
         margin: int = 1) -> Text:
     """ Pad and align a string in a container.
 
@@ -162,13 +162,15 @@ def render_row(row: List[Text],
 
 def render_table(headings: List[Text],
                  table: List[List[Text]],
-                 style: str = 'default') -> Text:
+                 style: Text = 'default',
+                 align: Optional[Text] = None) -> Text:
     """ This is where the magic happens!
 
     Args:
         headings: A list of text containing the headings.
         table: Cells data in a nested list of lists structure.
         style: Style of formatting in the table.
+        align: Override settings in style if specified.
 
     Returns:
         A string with formatting ready for output.
@@ -189,6 +191,10 @@ def render_table(headings: List[Text],
 
     styling = get_style(style)
 
+    if not align:
+        # Override alignment specified in styles.
+        align = styling['raw']['align']
+
     widths = [(width + 2) for width in columns_width([headings] + table)]
 
     divider = [''.join(styling['raw']['horizontal']) * width
@@ -199,13 +205,14 @@ def render_table(headings: List[Text],
         render_row(divider, widths, styling['top_border'], margin=0),
 
         # Headings
-        render_row(headings, widths, styling['row']),
+        render_row(headings, widths, styling['row'], align=align),
 
         # Heading/body divider
         render_row(divider, widths, styling['divider'], margin=0),
 
         # Actual table body
-        '\n'.join([render_row(row, widths, styling['row']) for row in table]),
+        '\n'.join([render_row(row, widths, styling['row'], align=align)
+                   for row in table]),
 
         # Bottom border
         render_row(divider, widths, styling['bottom_border'], margin=0)

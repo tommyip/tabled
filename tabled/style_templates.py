@@ -28,7 +28,8 @@ DEFAULT = {
     'up_joint':     '+',
     'left_joint':   '+',
     'right_joint':  '+',
-    'cross_joint':  '+'
+    'cross_joint':  '+',
+    'align':        'left'
 }
 
 # Style: terminal
@@ -50,7 +51,8 @@ TERMINAL = {
     'up_joint':     '╩',
     'left_joint':   '╠',
     'right_joint':  '╣',
-    'cross_joint':  '╬'
+    'cross_joint':  '╬',
+    'align':        'left'
 }
 
 STYLE_TEMPLATES = dict(

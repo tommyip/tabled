@@ -18,10 +18,12 @@ class TableD:
     """ Public interface for the central table abstraction.
 
     Attributes:
-        headings: A list of column headings which may contain any type.
-        data: Nested list of lists, each cell element may contain any type.
-        style: Style of pretty printed table.
-        device: Output device.
+        headings: A list of column headings.
+        data: Nested list of lists of cell contents.
+        style: Style of pretty printer.
+        align: Align cell content to either left, center or right. Default to
+               setting specified in style.
+        device: Where to output pretty printed table.
 
         _columns: The number of columns the table have.
         _output: Cached table string.
@@ -48,6 +50,7 @@ class TableD:
                  headings: Optional[List[Any]] = None,
                  data: Optional[List[List[Any]]] = None,
                  style: Text = 'default',
+                 align: Text = None,
                  device: Text = 'stdout') -> None:
         """ Initialize data storage engine for TableD. You should use
         tabled.new() to construct a TableD object. """
@@ -55,6 +58,7 @@ class TableD:
         self.headings = str_list(headings) if headings else []
         self.data = str_nested_list(data) if data else []
         self.style = style
+        self.align = align
         self.device = device
 
         self._columns = len(self.headings)
@@ -119,7 +123,8 @@ class TableD:
         if not self._cache_valid:
             self.data = [normalize_list(row, self._columns)
                          for row in self.data]
-            self._output = render_table(self.headings, self.data, self.style)
+            self._output = render_table(self.headings, self.data,
+                                        self.style, self.align)
             self._cache_valid = True
 
         print(self._output, file=sys.stdout)
