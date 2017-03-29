@@ -8,6 +8,9 @@ tests.tabled
 """
 
 from tabled.tabled import TableD
+from api import new_from_df
+import pandas
+
 
 
 class TestTableD:
@@ -32,6 +35,19 @@ class TestTableD:
              ['Someone', '23', 'someone@example.com', 'me.example.net']]
         assert table.style == 'fancy'
         assert table.device == 'rst'
+
+    def test_create_new_table_from_df(self) -> None:
+        df = pandas.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+                              columns=['one', 'two', 'three'])
+        headings = list(df.columns)
+        data = df.values.tolist()
+        table = new_from_df(df, 'fancy', 'rst')
+
+        assert table.headings == headings
+        assert table.data == \
+            [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+        assert table.style == 'fancy'
+        assert table.device == 'rst'                           
 
     def test_add_row_1(self) -> None:
         data = ['x1', 'x2', 'x3']
