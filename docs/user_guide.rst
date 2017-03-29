@@ -18,7 +18,7 @@ The *TableD* object is the main interface for visualizing your data, you can
 create a new instance using the ``new`` function::
 
     >>> tabled.new(['Heading 1', 'Heading 2'],
-                   [[1, 2], [3, 4]]).show()
+    ...            [[1, 2], [3, 4]]).show()
     +-----------+-----------+
     | Heading 1 | Heading 2 |
     +-----------+-----------+
@@ -84,6 +84,22 @@ Terminal::
     ║ 1 ║ 1  ║ 1  ║
     ║ 2 ║ 4  ║ 8  ║
     ╚═══╩════╩════╝
+
+Align
+"""""
+
+By default, the style template already provides an alignment setting, but it is
+possible to customize it using this argument. The available alignments are
+**left**, **center** and **right**::
+
+    >>> tabled.new(['Heading 1', 'Heading 2'], [[1, 2], [3, 4]],
+    ...            align='right').show()
+    +-----------+-----------+
+    | Heading 1 | Heading 2 |
+    +-----------+-----------+
+    |         1 |         2 |
+    |         3 |         4 |
+    +-----------+-----------+
 
 Device
 """"""
