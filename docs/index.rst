@@ -34,7 +34,7 @@ Table Of Contents
 -----------------
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 2
 
     installation
     user_guide

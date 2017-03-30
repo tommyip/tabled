@@ -1,7 +1,7 @@
 Installation
 ============
 
-You can only install the package from source code right now, but it would be
+You can only install the package from source code right now, but it will be
 available on PyPI as soon as the project reaches v1.0.0!
 
 From source code

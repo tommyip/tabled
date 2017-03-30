@@ -4,9 +4,6 @@ User guide
 *If you haven't installed tableD already, please follow the instruction*
 :doc:`here <installation>`.
 
-tableD has a very simple interface. This guide covers almost everything there
-is to produce pretty printed tables with tableD.
-
 Creating a new table
 --------------------
 
@@ -15,7 +12,7 @@ First, import the tabled package::
     import tabled
 
 The *TableD* object is the main interface for visualizing your data, you can
-create a new instance using the ``new`` function::
+create a new instance using the new constructor function::
 
     >>> tabled.new(['Heading 1', 'Heading 2'],
     ...            [[1, 2], [3, 4]]).show()
@@ -26,14 +23,14 @@ create a new instance using the ``new`` function::
     | 3         | 4         |
     +-----------+-----------+
 
-Lets break this down. The ``new`` function creates and returns a TableD object,
+Lets break this down. The new function creates and returns a TableD object,
 which accepts 4 optional arguments.
 
 Headings
 """"""""
 
-The ``heading`` argument should be a list of elements, which could be in any
-Python type. Examples::
+The heading argument should be a list of elements, the type of the cell
+would be converted to string automatically. Examples::
 
     ['Heading 1', 'Heading 2', some_variable, 10, True]
 
@@ -42,9 +39,9 @@ Python type. Examples::
 Data
 """"
 
-The second argument, ``data``, is a nested list of lists containing cell data
-for the table body. Same as the headings, each cell element could be in any
-Python types. Examples::
+The second argument, data, is a nested list of lists containing the table
+body. Same as the headings, each cell element could be in any Python types.
+Examples::
 
     [[1, 2], [3, 4], ["Cell 5", 6], [True, False]]
 
@@ -53,7 +50,7 @@ Python types. Examples::
 Style
 """""
 
-The style of the table is configured through the ``style`` argument, which is
+The style of the table is configured through the style argument, which is
 *default* for default. There are only two styles available for now, but you
 are welcome to help create more, see
 :doc:`Contributors Guide<contributors_guide>` for more information.
@@ -104,8 +101,8 @@ possible to customize it using this argument. The available alignments are
 Device
 """"""
 
-The ``device`` argument controls where the output is shown. The default is
-``stdout``, which is your terminal or python shell.
+The device argument controls where the output is shown. The default is stdout,
+which is your terminal or python shell.
 
 *More device options are coming soon...*
 
@@ -119,25 +116,19 @@ Modification after initialization
 ---------------------------------
 
 The arguments to ``tabled.new()`` are optional as mentioned above, they could
-be added or changed after the initialization of a new tabled instance. Although
-you can modify the fields directly like any other Python objects, using the
-setter methods are recommended since they validate and convert your data to
-strings.
+be added or changed after the initialization of a new tabled instance. Here are
+the available setter methods, which are fairly self explanatory::
 
-To set the headings of your table, use the ``.set_headings()`` method::
 
     >>> t = tabled.new()
 
+    # Set the table headings
     >>> t.set_headings(['Language', 'Typing', 'Runtime', 'Type'])
 
-Adding a new row is similar, you can use the ``.add_row()`` method, which
-accepts a list of items::
-
+    # Add a new row to the bottom of the table
     >>> t.add_row(['Python', 'Dynamic', 'CPython', 'OOP'])
 
-There is also a ``.add_rows()`` method that allows multiple rows to be added,
-in the form of a nested list::
-
+    # Add multiple rows to the table (must be nested list)
     >>> t.add_rows([
         ['Java', 'Static', 'JVM', 'OOP'],
         ['Elixir', 'Dynamic', 'BEAM', 'Functional']

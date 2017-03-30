@@ -4,8 +4,7 @@ API documentation
 
 Public interface
 ----------------
-Here is the documentation for the public API, all of the library's
-functionality can be accessed through these 5 methods.
+All of TableD's functionality can be accessed through these 5 methods.
 
 .. module:: tabled
 
@@ -18,7 +17,6 @@ functionality can be accessed through these 5 methods.
 
 Internals
 ---------
-Here is the documentation for all modules.
 
 .. automodule:: tabled.tabled
     :members:
