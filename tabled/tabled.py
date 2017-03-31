@@ -95,12 +95,11 @@ class TableD:
             [['x1', 'x2', 'x3'], ['y1', 'y2', 'y3']]
         """
 
-        self.data += str_nested_list(rows)
+        self.data.extend(str_nested_list(rows))
         self._cache_valid = False
 
     def set_headings(self, headings: List[Any]) -> None:
-        """ Set the headings of the table. Override the original headings if it
-        existed.
+        """ Overwrite or set the table headings.
 
         Args:
             headings: A list of column headings.

@@ -71,21 +71,19 @@ def columns_width(table: List[List[Text]]) -> List[int]:
         [20, 17]
     """
 
-    rotated_table = rotate_table(table)
-
-    return list(map(max_width, rotated_table))
+    return [max_width(row) for row in rotate_table(table)]
 
 
 def str_list(raw_list: List[Any]) -> List[Text]:
     """ Cast all elements in a list to Text type. """
 
-    return [str(item) for item in raw_list]
+    return list(map(str, raw_list))
 
 
 def str_nested_list(nested_raw_list: List[List[Any]]) -> List[List[Text]]:
     """ Cast all elements in a nested list to Text type. """
 
-    return [[str(item) for item in raw_list] for raw_list in nested_raw_list]
+    return list(map(str_list, nested_raw_list))
 
 
 def normalize_list(row: List[Text], size: int) -> List[Text]:
