@@ -34,5 +34,8 @@ def new(headings: Optional[List[Any]] = None,
         <tabled.tabled.TableD object at 0x...>
         >>> new(dataframe=new_df)
     """
+    if dataframe is not None:
+        headings = list(dataframe.columns)
+        data = dataframe.values.tolist()
 
-    return TableD(headings or [], data or [], style, device, dataframe)
+    return TableD(headings or [], data or [], style, device)

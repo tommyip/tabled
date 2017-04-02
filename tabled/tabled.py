@@ -52,12 +52,9 @@ class TableD:
                  dataframe: Optional[object] = None) -> None:
         """ Initialize data storage engine for TableD. You should use
         tabled.new() to construct a TableD object. """
-        if dataframe is not None:
-            self.headings = str_list(list(dataframe.columns))
-            self.data = str_nested_list(dataframe.values.tolist())
-        else:
-            self.headings = str_list(headings) if headings else []
-            self.data = str_nested_list(data) if data else []
+
+        self.headings = str_list(headings) if headings else []
+        self.data = str_nested_list(data) if data else []
         self.style = style
         self.device = device
 
